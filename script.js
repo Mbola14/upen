@@ -1,9 +1,9 @@
 // Le contenu du site se modifie ici, sans toucher à la mise en page.
 const services = [
-  { icon: "⌘", title: "Zoho CRM sur mesure", description: "Modules, champs, mises en page et fonctions Deluge adaptés à vos processus métier." },
-  { icon: "↗", title: "Intégrations API", description: "Connexion de vos outils via API REST, OAuth et webhooks, avec des échanges de données fiables." },
-  { icon: "◷", title: "Automatisations", description: "Des tâches répétitives prises en charge par des scénarios utiles et maintenables." },
-  { icon: "▤", title: "Zoho Books", description: "Personnalisation et automatisation de la facturation, reliées à vos outils existants." },
+  { icon: "⌘", title: "Personnalisation de Zoho CRM", description: "Modules, champs, vues, fonctions Deluge, boutons et widgets adaptés à vos processus métier.", href: "personnalisation-zoho.html" },
+  { icon: "↗", title: "Intégration API Zoho", description: "Connexion de Zoho CRM et Books à vos logiciels par API REST, OAuth et webhooks.", href: "integration-api.html" },
+  { icon: "◷", title: "Automatisation Zoho avec Deluge", description: "Automatisez vos règles métier et les tâches répétitives avec des fonctions personnalisées maintenables.", href: "personnalisation-zoho.html" },
+  { icon: "▤", title: "Personnalisation de Zoho Books", description: "Adaptez la facturation, les clients et les échanges entre Zoho Books, CRM et vos outils.", href: "personnalisation-zoho.html" },
 ];
 
 const projects = [
@@ -24,9 +24,13 @@ const projectList = document.querySelector("#project-list");
 const stepList = document.querySelector("#step-list");
 
 for (const service of services) {
-  const card = document.createElement("article");
+  const card = document.createElement(service.href ? "a" : "article");
   card.className = "service-card";
-  card.innerHTML = `<span class="service-icon" aria-hidden="true">${service.icon}</span><h3>${service.title}</h3><p>${service.description}</p>`;
+  if (service.href) {
+    card.href = service.href;
+    card.setAttribute("aria-label", `En savoir plus : ${service.title}`);
+  }
+  card.innerHTML = `<span class="service-icon" aria-hidden="true">${service.icon}</span><h3>${service.title}</h3><p>${service.description}</p>${service.href ? '<span class="service-detail">Découvrir cette expertise</span>' : ""}`;
   serviceList.append(card);
 }
 
@@ -67,8 +71,38 @@ navigation.addEventListener("click", (event) => {
   }
 });
 
-// La démo valide les champs mais n'envoie aucune donnée à un serveur.
-document.querySelector("#contact-form").addEventListener("submit", (event) => {
+const contactForm = document.querySelector("#contact-form");
+const submitButton = contactForm.querySelector('button[type="submit"]');
+const formFeedback = document.querySelector("#form-feedback");
+
+contactForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  document.querySelector("#form-feedback").textContent = "Merci, le formulaire est prêt. Connectez-le à un service d’envoi pour recevoir les demandes.";
+  
+  if (!contactForm.reportValidity()) return;
+  
+  const originalButtonText = submitButton.textContent;
+  submitButton.textContent = "Envoi en cours…";
+  submitButton.disabled = true;
+  formFeedback.textContent = "Votre message est en cours d’envoi…";
+  
+  try {
+    console.log("Form submission triggered 3");
+    const response = await fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: { Accept: "application/json" },
+    });
+    const result = await response.json();
+    console.log("Form submission response:", result);
+    if (!response.ok || result.success === false) {
+      throw new Error(result.message || result.body?.message || "L’envoi a échoué. Réessayez dans un instant.");
+    }
+
+    window.location.assign("merci.html");
+  } catch (error) {
+    formFeedback.textContent = error.message || "Une erreur empêche l’envoi du message. Vérifiez votre connexion et réessayez.";
+  } finally {
+    submitButton.textContent = originalButtonText;
+    submitButton.disabled = false;
+  }
 });
