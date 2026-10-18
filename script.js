@@ -38,7 +38,7 @@ for (const project of projects) {
     card.setAttribute("aria-label", `Découvrir : ${project.title}`);
   }
   const tags = project.tags.map((tag) => `<span>${tag}</span>`).join("");
-  card.innerHTML = `<div class="project-type"><span class="project-badge">${project.type}</span><span class="project-index">${project.index}</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="project-tags">${tags}</div>${project.href ? '<span class="project-link">Découvrir le service <span aria-hidden="true">↗</span></span>' : ""}`;
+  card.innerHTML = `<div class="project-type"><span class="project-badge">${project.type}</span><span class="project-index">${project.index}</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="project-tags">${tags}</div>${project.href ? '<span class="project-link">Découvrir le service</span>' : ""}`;
   projectList.append(card);
 }
 
