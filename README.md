@@ -1,16 +1,20 @@
 # Upen
 
-Page vitrine statique pour une activité de développement et d’intégration Zoho freelance. Le site utilise HTML, CSS et JavaScript natifs, sans installation ni backend.
+Site vitrine statique pour une activité de développement et d’intégration Zoho freelance. Il comprend une page d’accueil et des pages dédiées aux intégrations API, à la personnalisation et à la reprise technique Zoho. Le site utilise HTML, CSS et JavaScript natifs, sans installation ni backend.
 
 ## Lancer le site
 
-Ouvrez `index.html` directement dans un navigateur. Pour travailler avec un serveur local, utilisez l’extension Live Server de votre éditeur ou n’importe quel serveur de fichiers statiques.
+Ouvrez `index.html` directement dans un navigateur. Les cartes de la section projets mènent vers `integration-api.html`, `personnalisation-zoho.html` et `reprise-zoho.html`. Pour travailler avec un serveur local, utilisez l’extension Live Server de votre éditeur ou n’importe quel serveur de fichiers statiques.
 
 ## Personnaliser
 
 - **Services, exemples de projets et étapes de travail :** tableaux `services`, `projects` et `steps` dans `script.js`.
-- **Textes de présentation, navigation et formulaire :** `index.html`.
+- **Textes de présentation, navigation et formulaire de la page d’accueil :** `index.html`.
+- **Contenu de la page intégrations API :** `integration-api.html`.
+- **Contenu de la page personnalisation Zoho :** `personnalisation-zoho.html`.
+- **Contenu de la page reprise technique Zoho :** `reprise-zoho.html`.
 - **Couleurs, typographie et mise en page responsive :** variables en haut de `styles.css`, puis les règles de styles associées.
+- **Styles propres à la page intégrations API :** `integration.css`.
 
 Les trois réalisations présentes sont des contenus de démonstration, pas des références client. Remplacez-les dans `script.js` par des exemples représentatifs de votre expérience.
 

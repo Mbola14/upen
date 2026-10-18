@@ -7,9 +7,9 @@ const services = [
 ];
 
 const projects = [
-  { type: "Zoho CRM · Démonstration", index: "01", title: "Un CRM qui suit le bon rythme", description: "Un exemple de personnalisation du pipeline, des modules et des automatisations pour mieux refléter les étapes de vente d’une équipe.", tags: ["Zoho CRM", "Deluge", "Automatisation"] },
-  { type: "Intégration · Démonstration", index: "02", title: "Les outils qui se répondent", description: "Un exemple de connexion entre Zoho CRM et une application tierce via API, OAuth et webhooks.", tags: ["API REST", "OAuth", "Webhooks"] },
-  { type: "Zoho Books · Démonstration", index: "03", title: "Une facturation plus fluide", description: "Un exemple d’automatisation du parcours de facturation entre CRM et Zoho Books, selon les règles de l’entreprise.", tags: ["Zoho Books", "Deluge", "Facturation"] },
+  { type: "Intégration API", index: "01", title: "Connectez Zoho à vos autres logiciels", description: "Des intégrations sur mesure pour synchroniser vos données, relier vos applications et réduire les tâches répétitives.", tags: ["API REST", "OAuth", "Webhooks"], href: "integration-api.html" },
+  { type: "Personnalisation Zoho", index: "02", title: "Personnalisez Zoho selon vos besoins métier", description: "Des fonctions Deluge, modules, widgets et actions sur mesure pour adapter Zoho CRM et Zoho Books à votre activité.", tags: ["Zoho CRM", "Zoho Books", "Deluge"], href: "personnalisation-zoho.html" },
+  { type: "Reprise technique Zoho", index: "03", title: "Reprenez le contrôle de votre environnement Zoho", description: "Comprendre l’existant, fiabiliser les automatisations et préparer les évolutions de Zoho CRM et Zoho Books.", tags: ["Audit technique", "Maintenance", "Documentation"], href: "reprise-zoho.html" },
 ];
 
 const steps = [
@@ -31,10 +31,14 @@ for (const service of services) {
 }
 
 for (const project of projects) {
-  const card = document.createElement("article");
+  const card = document.createElement(project.href ? "a" : "article");
   card.className = "project-card";
+  if (project.href) {
+    card.href = project.href;
+    card.setAttribute("aria-label", `Découvrir : ${project.title}`);
+  }
   const tags = project.tags.map((tag) => `<span>${tag}</span>`).join("");
-  card.innerHTML = `<div class="project-type"><span class="project-badge">${project.type}</span><span class="project-index">${project.index}</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="project-tags">${tags}</div>`;
+  card.innerHTML = `<div class="project-type"><span class="project-badge">${project.type}</span><span class="project-index">${project.index}</span></div><h3>${project.title}</h3><p>${project.description}</p><div class="project-tags">${tags}</div>${project.href ? '<span class="project-link">Découvrir le service <span aria-hidden="true">↗</span></span>' : ""}`;
   projectList.append(card);
 }
 
