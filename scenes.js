@@ -11,6 +11,15 @@ const scenes = {
       'D’accord, je te rejoins à Châtelet.',
     ],
     wrongAnswers: [1],
+    response: 'Azy, j’arrive mon cœur. Je serai là à 19:10.',
+    followUpQuestion: 'Que répond Anja ?',
+    followUpAnswers: [
+      'Je t’attendrai à la sortie du métro.',
+      'Nan, je rentre chez moi, ela be zany.',
+    ],
+    followUpWrongAnswers: [1],
+    followUpResponse: 'Je suis là.',
+    waitDuration: 4000,
     nextPage: 'scene2.html',
   },
 
@@ -21,6 +30,7 @@ const scenes = {
     miniGame: 'findAnja',
     successAnswer: 'Je suis entre la mairie et l’église.',
     response: 'Oh wow ! Jolie casquette ry olo tiko ann.',
+    followUpResponse: 'Elle te va à merveille, j’aime trop ! Allez, viens, je te tiens la main fona na tsemboka ary.',
     nextPage: 'scene3.html',
   },
 
@@ -29,6 +39,20 @@ const scenes = {
     chapter: 'SCÈNE 03 · POUR NOTRE SOIRÉE',
     openingLine: 'Bon, on va chercher à manger pour notre petite soirée.',
     miniGame: 'shopping',
+    messageDelay: 650,
+    wineAddedMessage: {
+      speaker: 'Mbola',
+      text: 'De toute façon je l’aurais prise cette bouteille.',
+      person: 'mbola',
+    },
+    afterShoppingMessages: [
+      { speaker: 'Anja', text: 'T’es sûr, tu veux pas prendre autre chose ?', person: 'anja' },
+      { speaker: 'Mbola', text: 'Nan c’est tout bon. Le seul truc que je veux manger ici c’est toi ein. Je paye en carte svp.', person: 'mbola' },
+      { speaker: 'Anja', text: 'NOOOONNN je paye en espèce svp !', person: 'anja' },
+      { speaker: 'Mbola', text: 'Trop taaaaard', person: 'mbola' },
+      { speaker: 'Anja', text: 'Bah je te passe ce billet de 20 € du coup.', person: 'anja' },
+      { speaker: 'Mbola', text: 'Parfait, on a tout ce qu’il nous faut !', person: 'mbola' },
+    ],
     nextPage: 'scene4.html',
   },
 
@@ -42,13 +66,28 @@ const scenes = {
       'Continuons à chercher, il y a trop de monde.',
       'Viens, on s’installe sur ces marches.',
     ],
+    messageDelay: 650,
+    afterAnswerMessages: [
+      { speaker: 'Mbola', text: 'Ah ptn on n’a pas de télé ajd.', person: 'mbola' },
+      { speaker: 'Anja', text: 'Je pensais à exactement la mm chose.', person: 'anja' },
+      { speaker: 'Mbola', text: 'Muahhhhh', person: 'mbola' },
+      { speaker: 'Mbola', text: 'J’aime bien ce petit regard après le bisou.', person: 'mbola' },
+      { speaker: 'Mbola', text: 'Ajd j’ai pas d’heure à respecter.', person: 'mbola' },
+    ],
+    followUpQuestion: 'Et maintenant, qu’est-ce qu’on fait ?',
+    followUpAnswers: [
+      'Moi je dois rentrer, allez bye !',
+      'Ok trop bien, tu veux pas qu’on trouve un autre endroit là ?',
+    ],
+    followUpWrongAnswers: [0],
+    followUpResponse: 'Tu lis dans mes pensées.',
     nextPage: 'scene5.html',
   },
 
   5: {
     title: 'Trouver un endroit où manger',
     chapter: 'SCÈNE 05 · ON CHERCHE UN ENDROIT',
-    openingLine: 'Bon, maintenant, trouvons un endroit où manger.',
+    openingLine: 'Tu as faim chérie ?',
     question: 'Où est-ce qu’on se pose ?',
     answers: [
       'Pizza',

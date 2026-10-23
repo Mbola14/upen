@@ -12,6 +12,8 @@
   const endingPanel = document.querySelector('#endingPanel');
   const progress = document.querySelector('#progress');
   const progressText = document.querySelector('#progressText');
+  const nextButton = document.querySelector('#sceneNextButton');
+  const pageShell = document.querySelector('.page-shell');
 
   document.querySelector('#sceneChapter').textContent = scene.chapter;
   document.querySelector('#sceneTitle').textContent = scene.title;
@@ -64,7 +66,19 @@
     row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  async function addMessagesSequentially(messages, delay = scene.messageDelay ?? 650) {
+    for (const [index, message] of messages.entries()) {
+      if (index > 0) {
+        await new Promise((resolve) => window.setTimeout(resolve, delay));
+      }
+      addMessage(message.speaker, message.text, message.person);
+    }
+  }
+
   function showAnswers(question, answers, onSelect) {
+    choices.hidden = false;
+    nextButton.hidden = true;
+    pageShell.classList.remove('has-scene-next');
     prompt.textContent = question;
     answerList.replaceChildren();
 
@@ -80,31 +94,21 @@
   }
 
   function showContinue() {
-    answerList.replaceChildren();
-    const button = document.createElement('a');
-    button.className = 'continue-button';
-    button.href = scene.nextPage;
-    button.innerHTML = 'Continuer <span aria-hidden="true">→</span>';
-    answerList.append(button);
-    prompt.textContent = 'Prête pour la suite ?';
+    choices.hidden = true;
+    nextButton.href = scene.nextPage;
+    nextButton.hidden = false;
+    pageShell.classList.add('has-scene-next');
   }
 
   function startFindAnja() {
     const map = document.querySelector('#cityMap');
     const target = document.querySelector('#mapTarget');
     const status = document.querySelector('#mapStatus');
-    let misses = 0;
     let found = false;
-    const missedLines = [
-      'Où es-tu, je ne te trouve pas.',
-      'Je suis perdu là.',
-      'Chérie, je te cherche partout.',
-    ];
 
     function showMiss() {
       if (found) return;
-      addMessage('Enzo', missedLines[misses % missedLines.length], 'mbola');
-      misses += 1;
+      addMessage('Anja', 'Moi je te voiiiiiis !', 'anja');
       status.textContent = 'Pas encore… continue à chercher sur la carte.';
       status.classList.add('is-hint');
     }
@@ -120,6 +124,7 @@
       status.textContent = 'Tu as retrouvé Anja ! 💜';
       addMessage('Anja', scene.successAnswer, 'anja');
       addMessage('Mbola', scene.response, 'mbola');
+      addMessage('Mbola', scene.followUpResponse, 'mbola');
       choices.hidden = false;
       showContinue();
     }
@@ -179,6 +184,7 @@
     const basket = new Set();
     let completed = false;
     let activeDrag = null;
+    let wineConversationPlayed = false;
 
     function resetFeedback() {
       feedback.textContent = 'Il nous faut des chips, du vin et un verre à jeter.';
@@ -188,6 +194,13 @@
     function renderShopping() {
       renderProducts();
       renderBag();
+    }
+
+    function showWineConversation(productId) {
+      if (productId !== 'vin' || wineConversationPlayed || !scene.wineAddedMessage) return;
+      wineConversationPlayed = true;
+      const { speaker, text, person } = scene.wineAddedMessage;
+      addMessage(speaker, text, person);
     }
 
     function bindImageInteractions(image, productId, origin) {
@@ -215,6 +228,7 @@
         if (event.repeat) return;
         event.preventDefault();
         if (completed) return;
+        const wasInBasket = basket.has(productId);
         if (origin === 'shelf') {
           if (basket.has(productId)) basket.delete(productId);
           else basket.add(productId);
@@ -223,6 +237,7 @@
         }
         resetFeedback();
         renderShopping();
+        if (!wasInBasket && basket.has(productId)) showWineConversation(productId);
         productGrid.querySelector(`[data-product-id="${productId}"]`)?.focus();
       });
     }
@@ -265,6 +280,7 @@
 
       const target = document.elementFromPoint(event.clientX, event.clientY);
       const droppedInBag = Boolean(target?.closest('#shoppingBag'));
+      const wasInBasket = basket.has(drag.productId);
       let changed = false;
       if (!cancelled && drag.origin === 'shelf' && droppedInBag && !basket.has(drag.productId)) {
         basket.add(drag.productId);
@@ -284,6 +300,7 @@
       if (changed) {
         resetFeedback();
         renderShopping();
+        if (!wasInBasket && basket.has(drag.productId)) showWineConversation(drag.productId);
       }
     }
 
@@ -357,9 +374,7 @@
       checkBag.disabled = true;
       renderProducts();
       renderBag();
-      addMessage('Mbola', 'Parfait, on a tout ce qu’il nous faut !', 'mbola');
-      choices.hidden = false;
-      showContinue();
+      addMessagesSequentially(scene.afterShoppingMessages ?? []).then(showContinue);
     });
 
     renderProducts();
@@ -511,13 +526,23 @@
       return;
     }
 
-    addMessage('Anja', answer, 'anja');
-
     if (sceneNumber === 1) {
-      window.location.href = scene.nextPage;
+      addMessage('Anja', answer, 'anja');
+      addMessage('Mbola', scene.response, 'mbola');
+      showAnswers(scene.followUpQuestion, scene.followUpAnswers, chooseMeetingAnswer);
       return;
     }
 
+    if (scene.afterAnswerMessages) {
+      choices.hidden = true;
+      const messages = [{ speaker: 'Anja', text: answer, person: 'anja' }, ...scene.afterAnswerMessages];
+      addMessagesSequentially(messages).then(() => {
+        showAnswers(scene.followUpQuestion, scene.followUpAnswers, chooseScene4FollowUp);
+      });
+      return;
+    }
+
+    addMessage('Anja', answer, 'anja');
     const reply = Array.isArray(scene.responses) ? scene.responses[index] : scene.response;
     if (reply) addMessage('Mbola', reply, 'mbola');
 
@@ -532,6 +557,38 @@
     }
 
     showContinue();
+  }
+
+  function chooseMeetingAnswer(answer, index) {
+    if (scene.followUpWrongAnswers?.includes(index)) {
+      retryDialog.showModal();
+      return;
+    }
+
+    addMessage('Anja', answer, 'anja');
+    choices.hidden = true;
+    const meetingWait = document.querySelector('#meetingWait');
+    meetingWait.hidden = false;
+    meetingWait.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    window.setTimeout(() => {
+      meetingWait.hidden = true;
+      addMessage('Mbola', scene.followUpResponse, 'mbola');
+      showContinue();
+    }, scene.waitDuration);
+  }
+
+  function chooseScene4FollowUp(answer, index) {
+    if (scene.followUpWrongAnswers?.includes(index)) {
+      retryDialog.showModal();
+      return;
+    }
+
+    choices.hidden = true;
+    addMessagesSequentially([
+      { speaker: 'Anja', text: answer, person: 'anja' },
+      { speaker: 'Mbola', text: scene.followUpResponse, person: 'mbola' },
+    ]).then(showContinue);
   }
 
   function finishHug(answer) {

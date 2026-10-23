@@ -29,7 +29,8 @@
 .gift-message.is-visible { opacity: 1; transform: translateY(0); }
 .gift-message p { margin: 0 0 9px; }
 .gift-message .gift-letter { color: #f1e5ff; font: 700 15px/1.6 Manrope, sans-serif; }
-.gift-continue { margin-top: 5px; }
+.gift-continue { display: inline-flex; flex: 0 0 auto; width: auto; height: auto; min-height: 40px; margin-top: 5px; padding: 10px 16px; border-radius: 10px; box-shadow: none; font-size: 11px; }
+.gift-continue span { width: auto; height: auto; font: 700 11px/1 Manrope, sans-serif; }
 .gift-footer-note { margin: 0; color: #93849f; font-size: 9px; text-align: center; transition: opacity .25s; }
 
 @media (max-width: 520px) {

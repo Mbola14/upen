@@ -35,6 +35,15 @@
         <div class="dialogue" id="dialogue" aria-live="polite" aria-relevant="additions">
         </div>
 
+        <section class="meeting-wait" id="meetingWait" aria-live="polite" hidden>
+          <div class="arrival-track" aria-hidden="true">
+            <span class="arrival-line"></span>
+            <span class="arrival-heart">♥</span>
+            <span class="arrival-pin">⌖</span>
+          </div>
+          <p>Mbola est en route…</p>
+        </section>
+
         <section class="choice-panel" id="choices" aria-label="Choix de réponse">
           <p class="choice-question" id="choicePrompt"></p>
           <div class="answer-list" id="answerList"></div>
@@ -53,6 +62,7 @@
           <span class="footer-hearts" aria-hidden="true">✦ &nbsp; ♡ &nbsp; ✦</span>
         </footer>
       </section>
+      <a class="scene-next-button" id="sceneNextButton" href="scene2.html" aria-label="Continuer vers la scène suivante" hidden><span aria-hidden="true">→</span></a>
       <footer class="page-footer"><span>fait avec beaucoup d’amour <b>♥</b></span><span>un petit souvenir, rien qu’à nous</span></footer>
     </main>
 
