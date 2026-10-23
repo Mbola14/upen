@@ -75,7 +75,7 @@
     }
   }
 
-  function showAnswers(question, answers, onSelect) {
+  function showAnswers(question, answers, onSelect, answerLabels = []) {
     choices.hidden = false;
     nextButton.hidden = true;
     pageShell.classList.remove('has-scene-next');
@@ -86,7 +86,7 @@
       const button = document.createElement('button');
       button.className = 'answer-button';
       button.type = 'button';
-      button.innerHTML = `<span class="answer-letter">${String.fromCharCode(65 + index)}</span><span class="answer-copy"></span><span class="answer-arrow" aria-hidden="true">↗</span>`;
+      button.innerHTML = `<span class="answer-letter">${answerLabels[index] ?? String.fromCharCode(65 + index)}</span><span class="answer-copy"></span><span class="answer-arrow" aria-hidden="true">↗</span>`;
       button.querySelector('.answer-copy').textContent = answer;
       button.addEventListener('click', () => onSelect(answer, index));
       answerList.append(button);
@@ -542,6 +542,23 @@
       return;
     }
 
+    const answerBranch = scene.answerBranches?.[index];
+    if (answerBranch) {
+      choices.hidden = true;
+      addMessagesSequentially([
+        { speaker: 'Anja', text: answer, person: 'anja' },
+        ...answerBranch.messages,
+      ]).then(() => {
+        showAnswers(
+          answerBranch.question,
+          answerBranch.answers,
+          (branchAnswer, branchIndex) => chooseAnswerBranch(answerBranch, branchAnswer, branchIndex),
+          answerBranch.answerLabels,
+        );
+      });
+      return;
+    }
+
     addMessage('Anja', answer, 'anja');
     const reply = Array.isArray(scene.responses) ? scene.responses[index] : scene.response;
     if (reply) addMessage('Mbola', reply, 'mbola');
@@ -557,6 +574,20 @@
     }
 
     showContinue();
+  }
+
+  function chooseAnswerBranch(branch, answer, index) {
+    if (branch.wrongAnswers?.includes(index)) {
+      retryDialog.showModal();
+      return;
+    }
+
+    choices.hidden = true;
+    const messages = [
+      { speaker: 'Anja', text: answer, person: 'anja' },
+      ...branch.afterAnswerMessages,
+    ];
+    addMessagesSequentially(messages).then(showContinue);
   }
 
   function chooseMeetingAnswer(answer, index) {
@@ -592,9 +623,12 @@
   }
 
   function finishHug(answer) {
-    addMessage('Anja', answer, 'anja');
-    addMessage('Mbola', scene.ending, 'mbola');
-    finishScene();
+    choices.hidden = true;
+    addMessagesSequentially([
+      { speaker: 'Anja', text: answer, person: 'anja' },
+      ...(scene.beforeEndingMessages ?? []),
+      { speaker: 'Mbola', text: scene.ending, person: 'mbola' },
+    ]).then(finishScene);
   }
 
   function finishScene() {

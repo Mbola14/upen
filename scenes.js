@@ -89,11 +89,28 @@ const scenes = {
     chapter: 'SCÈNE 05 · ON CHERCHE UN ENDROIT',
     openingLine: 'Tu as faim chérie ?',
     question: 'Où est-ce qu’on se pose ?',
-    answers: [
-      'Pizza',
-      'Rramen',
-      'Tiens, un pita. Ca a l’air bon !',
-    ],
+    answers: ['Pizza', 'Ramen'],
+    wrongAnswers: [1],
+    messageDelay: 650,
+    answerBranches: {
+      0: {
+        messages: [
+          { speaker: 'Mbola', text: 'Tu veux qu’on aille là ?', person: 'mbola' },
+          { speaker: 'Anja', text: 'Tsais quoi ? Vazy, on cherche encore.', person: 'anja' },
+          { speaker: 'Mbola', text: 'Y a des pita, ça a l’air bon.', person: 'mbola' },
+        ],
+        question: 'On prend un pita ?',
+        answers: ['Pita'],
+        answerLabels: ['C'],
+        afterAnswerMessages: [
+          { speaker: 'Anja', text: 'Je vais pas pouvoir terminer un entier.', person: 'anja' },
+          { speaker: 'Mbola', text: 'Tkt, on partage un. Moi aussi j’ai pas la dalle de fou.', person: 'mbola' },
+          { speaker: 'Mbola', text: 'Tu sais que j’ai perdu les 20 €.', person: 'mbola' },
+          { speaker: 'Anja', text: 'Wshhh, regarde tes poches.', person: 'anja' },
+          { speaker: 'Mbola', text: 'Azyyy, on prend un Vélib, je connais un parc à 20 minutes.', person: 'mbola' },
+        ],
+      },
+    },
     nextPage: 'scene6.html',
   },
 
@@ -115,6 +132,7 @@ const scenes = {
       'Je veux faire un tour du parc d’abord.',
       'Viens, j’ai envie de te faire un câlin.',
     ],
+    messageDelay: 650,
     response: 'Ry olo tiko ann, viens là.',
     followUpQuestion: 'Et Anja répond…',
     followUpAnswers: [
@@ -122,6 +140,20 @@ const scenes = {
       'Encore un câlin.',
       'Je ne te lâche plus. ❤️',
     ],
-    ending: 'Tu sais, je me sens comme ça en amour pour la deuxième fois de ma vie. La première fois, j’avais 13 ans. Je ne pensais pas que ça allait encore m’arriver. 💜',
+    beforeEndingMessages: [
+      { speaker: 'Mbola', text: 'J ai trop envie de toi.', person: 'mbola' },
+      { speaker: 'Anja', text: 'Moi aussi muahhh', person: 'anja' },
+      { speaker: 'Mbola', text: 'Ptn j arrive pas à ouvrir le bouton', person: 'mbola' },
+      { speaker: 'Anja', text: 'Mais tu veux faire quoi...', person: 'anja' },
+      { speaker: 'Anja', text: 'Tu sais c est la première fois je donne mon corps aussi vite.', person: 'anja' },
+      { speaker: 'Mbola', text: 'Ahh oui? Mais je quand mm vérifier un truc dans ton pantalon pcq je sais si tu  as menti quand t as dit que tu es mouillée', person: 'mbola' },
+      { speaker: 'Mbola', text: 'Tourne toi de l autre côté', person: 'mbola' },
+      { speaker: 'Anja', text: 'Mmmphhhhh', person: 'anja' },
+      { speaker: 'Mbola', text: 'J ai encore plus envie de toi mtn', person: 'mbola' },
+      { speaker: 'Anja', text: 'Tu veux backsit2 ?', person: 'anja' },
+      { speaker: 'Mbola', text: 'Oeeee...', person: 'mbola' },
+      { speaker: 'Anja', text: 'Slurp', person: 'anja' },
+    ],
+    ending: 'Tiako enaoooo eeeee na de nalahelo beee ary za omaly chérie ahh 💜',
   },
 };
