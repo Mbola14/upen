@@ -13,7 +13,9 @@ Ouvrez `index.html` directement dans un navigateur. Les cartes de la section pro
 - **Contenu de la page intégrations API :** `integration-api.html`.
 - **Contenu de la page personnalisation Zoho :** `personnalisation-zoho.html`.
 - **Contenu de la page reprise technique Zoho :** `reprise-zoho.html`.
-- **Couleurs, typographie et mise en page responsive :** variables en haut de `styles.css`, puis les règles de styles associées.
+- **Palette des modes jour et nuit :** variables dans `theme.css`.
+- **Interrupteur jour/nuit et mémorisation du choix :** `theme.js`.
+- **Typographie et mise en page responsive :** variables en haut de `styles.css`, puis les règles de styles associées.
 - **Styles propres à la page intégrations API :** `integration.css`.
 - **Photo affichée sur le site :** `portrait.webp` (version optimisée). L’original `portrait.png` est conservé comme source.
 

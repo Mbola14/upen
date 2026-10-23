@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#171127" />
+    <title>Notre histoire — scène 2</title>
+    <link rel="stylesheet" href="scene.css" />
+    <script src="scenes.js" defer></script>
+    <script src="scene.js" defer></script>
+  </head>
+  <body data-scene="2">
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="wordmark" href="scene1.html" aria-label="Recommencer l’histoire"><span class="wordmark-icon">u.</span><span>notre histoire</span></a>
+        <div class="date-pill"><span class="date-dot"></span> MARDI 6 OCTOBRE 2026</div>
+      </header>
+      <section class="story-card" aria-label="Dialogue entre Mbola et Anja">
+        <div class="scene-topline">
+          <span class="chapter-label" id="sceneChapter"></span>
+          <span class="scene-date">PARIS · 2026</span>
+        </div>
+        <div class="scene-heading">
+          <h1 id="sceneTitle"></h1>
+          <span class="scene-heart" aria-hidden="true">♡</span>
+        </div>
+        <div class="progress-track" id="progress" role="progressbar" aria-label="Progression de l’histoire" aria-valuemin="1" aria-valuemax="7" aria-valuenow="2">
+          <span class="progress-fill" id="progressFill"></span>
+        </div>
+        <div class="dialogue" id="dialogue" aria-live="polite" aria-relevant="additions"></div>
+        <section class="map-game" id="mapGame" aria-labelledby="mapTitle" hidden>
+          <div class="map-heading">
+            <div><p class="map-kicker">MINI-JEU · CHÂTELET</p><h2 id="mapTitle">Retrouve Anja sur la carte</h2></div>
+            <span class="map-number">02</span>
+          </div>
+          <p class="map-instruction">Repère les lieux qu’elle t’a décrits et clique sur l’endroit où elle attend.</p>
+          <div class="map-frame">
+            <svg class="city-map" id="cityMap" viewBox="0 0 720 460" role="group" aria-label="Carte simplifiée avec la sortie du métro, l’église rue des Écoles et la mairie rue du Rendez-vous">
+              <rect width="720" height="460" rx="18" fill="#f4efe7" />
+              <path class="map-road" d="M25 221 C124 187 181 199 270 219 S453 254 695 211" />
+              <path class="map-road" d="M226 24 C244 119 229 161 252 219 S257 342 226 435" />
+              <path class="map-road" d="M476 21 C459 112 479 175 463 223 S455 345 483 437" />
+              <path class="map-road" d="M477 148 H695" />
+              <path class="map-road" d="M35 352 C132 331 190 343 233 358 S376 390 465 354 S545 414 687 414" />
+              <path class="map-road-center" d="M25 221 C124 187 181 199 270 219 S453 254 695 211" />
+              <path class="map-road-center" d="M226 24 C244 119 229 161 252 219 S257 342 226 435" />
+              <path class="map-road-center" d="M476 21 C459 112 479 175 463 223 S455 345 483 437" />
+              <path class="map-road-center" d="M477 148 H695" />
+              <path class="map-road-center" d="M35 352 C132 331 190 343 233 358 S376 390 465 354 S545 414 687 414" />
+
+              <g class="map-blocks" aria-hidden="true">
+                <rect x="43" y="41" width="145" height="104" rx="15" />
+                <rect x="274" y="40" width="154" height="111" rx="15" />
+                <rect x="512" y="37" width="158" height="90" rx="15" />
+                <rect x="43" y="270" width="145" height="62" rx="15" />
+                <rect x="276" y="287" width="146" height="41" rx="13" />
+                <rect x="511" y="270" width="160" height="65" rx="15" />
+                <rect x="42" y="379" width="147" height="48" rx="14" />
+              </g>
+
+              <g class="landmark metro-landmark" aria-label="Sortie du métro">
+                <circle class="landmark-disc" cx="93" cy="219" r="32" />
+                <path class="metro-stairs" d="M77 222 h32 M80 216 h26 M84 210 h18 M87 204 h12" />
+                <path class="metro-arrow" d="M93 200 v-8 m-4 4 4-4 4 4" />
+                <text class="map-label" x="93" y="270">SORTIE DU MÉTRO</text>
+              </g>
+
+              <g class="landmark church-landmark" aria-label="Église">
+                <rect class="building" x="556" y="43" width="67" height="58" rx="7" />
+                <path class="building-roof" d="M550 47 589 22 629 47Z" />
+                <path class="church-tower" d="M579 43 V25 L589 11 599 25 V43Z" />
+                <path class="church-cross" d="M589 4 v13 M584 9 h10" />
+                <path class="building-door" d="M582 101 V82 a7 7 0 0 1 14 0 v19" />
+                <text class="map-label" x="589" y="124">ÉGLISE</text>
+              </g>
+
+              <g class="landmark townhall-landmark" aria-label="Mairie">
+                <rect class="building" x="548" y="299" width="81" height="55" rx="7" />
+                <path class="building-roof" d="M542 304 589 278 635 304Z" />
+                <rect class="building-window" x="561" y="314" width="10" height="13" rx="2" />
+                <rect class="building-window" x="584" y="314" width="10" height="13" rx="2" />
+                <rect class="building-window" x="607" y="314" width="10" height="13" rx="2" />
+                <path class="building-door" d="M583 354 v-19 a7 7 0 0 1 14 0 v19" />
+                <text class="map-label" x="589" y="375">MAIRIE</text>
+              </g>
+
+              <text class="street-label" x="586" y="153">RUE DES ÉCOLES</text>
+              <text class="street-label" x="589" y="430">RUE DU RENDEZ-VOUS</text>
+
+              <g class="map-target" id="mapTarget" role="button" tabindex="0" aria-label="Chercher Anja juste sous l’église, rue des Écoles" aria-pressed="false">
+                <circle class="target-glow" cx="589" cy="184" r="28" />
+                <circle class="target-ring" cx="589" cy="184" r="17" />
+                <circle class="target-dot" cx="589" cy="184" r="5" />
+                <text class="target-hint" x="589" y="214">?</text>
+              </g>
+            </svg>
+          </div>
+          <p class="map-status" id="mapStatus" aria-live="polite">Elle est quelque part près de la sortie du métro…</p>
+        </section>
+        <section class="choice-panel" id="choices" aria-label="Choix de réponse">
+          <p class="choice-question" id="choicePrompt"></p>
+          <div class="answer-list" id="answerList"></div>
+        </section>
+        <section class="ending-panel" id="endingPanel" hidden>
+          <span class="ending-heart" aria-hidden="true">♡</span>
+          <p class="ending-label">FIN DE NOTRE PETITE HISTOIRE</p>
+          <h2>Joyeux anniversaire, Anja.</h2>
+          <p>Une soirée qui restera parmi mes plus beaux souvenirs. Je t’aime. 💜</p>
+          <button class="memories-button" id="openMemories" type="button">Voir la carte maintenant <span aria-hidden="true">↗</span></button>
+        </section>
+        <footer class="scene-footer">
+          <span id="progressText">Scène 2 sur 7</span>
+          <span class="footer-hearts" aria-hidden="true">✦ &nbsp; ♡ &nbsp; ✦</span>
+        </footer>
+      </section>
+      <footer class="page-footer"><span>fait avec beaucoup d’amour <b>♥</b></span><span>un petit souvenir, rien qu’à nous</span></footer>
+    </main>
+    <dialog class="retry-dialog" id="retryDialog" aria-labelledby="retryTitle" aria-describedby="retryDescription">
+      <div class="retry-icon" aria-hidden="true">↻</div>
+      <p class="dialog-kicker">ON REPREND ?</p>
+      <h2 id="retryTitle">Cette réponse ne fait pas avancer l’histoire.</h2>
+      <p id="retryDescription">Recommence depuis le début pour retrouver le bon chemin.</p>
+      <button type="button" class="restart-button" id="restartStory">Recommencer l’histoire <span aria-hidden="true">↗</span></button>
+    </dialog>
+    
+  </body>
+</html>

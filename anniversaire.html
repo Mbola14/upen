@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#171127" />
+    <title>Un cadeau pour Anja — Mbola</title>
+    <link rel="stylesheet" href="scene.css" />
+    <link rel="stylesheet" href="cadeau.css" />
+    <script src="cadeau.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="wordmark" href="anniversaire.html" aria-label="Revenir au cadeau"><span class="wordmark-icon">u.</span><span>notre histoire</span></a>
+        <div class="date-pill"><span class="date-dot"></span> POUR ANJA · 6 OCTOBRE 2026</div>
+      </header>
+
+      <section class="story-card gift-card" aria-labelledby="giftTitle">
+        <div class="scene-topline">
+          <span class="chapter-label">UNE SURPRISE RIEN QU’À TOI</span>
+          <span class="scene-date">AVEC TOUT MON AMOUR</span>
+        </div>
+        <div class="scene-heading">
+          <h1 id="giftTitle">Un petit cadeau pour toi.</h1>
+          <span class="scene-heart" aria-hidden="true">♡</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="giftProgress"></span></div>
+
+        <p class="gift-instruction" id="giftInstruction">Clique sur le nœud pour l’ouvrir 💜</p>
+        <div class="gift-stage">
+          <div class="gift-box" id="giftBox">
+            <div class="gift-paper" id="giftPaper" aria-hidden="true">♡</div>
+            <div class="gift-body">
+              <span class="gift-body-ribbon gift-ribbon-vertical"></span>
+              <span class="gift-body-ribbon gift-ribbon-horizontal"></span>
+            </div>
+            <div class="gift-lid">
+              <span class="gift-ribbon-vertical"></span>
+            </div>
+            <button class="gift-knot" id="giftKnot" type="button" aria-label="Ouvrir le cadeau en cliquant sur le nœud" aria-expanded="false" aria-controls="giftMessage">
+              <span class="bow-loop bow-loop-left"></span>
+              <span class="bow-loop bow-loop-right"></span>
+              <span class="bow-center"></span>
+            </button>
+          </div>
+        </div>
+
+        <section class="gift-message" id="giftMessage" aria-live="polite" hidden>
+          <p class="gift-letter">Nous allons retracer ma plus belle journée pour que ta journée soit encore plus spéciale aujourd’hui.</p>
+          <p>Au fil des scènes, tu retrouveras des petits défis, des souvenirs et tout ce que j’ai envie de te dire. Je suis tellement heureux d’avoir partagé cette journée avec toi. Joyeux anniversaire, ma vie. 💜</p>
+          <a class="continue-button gift-continue" href="scene1.html">Découvrir notre journée <span aria-hidden="true">→</span></a>
+        </section>
+
+        <p class="gift-footer-note" id="giftFooterNote">Un nœud, une surprise, et toute une journée à revivre.</p>
+      </section>
+      <footer class="page-footer"><span>fait avec beaucoup d’amour <b>♥</b></span><span>un petit cadeau, rien qu’à nous</span></footer>
+    </main>
+  </body>
+</html>

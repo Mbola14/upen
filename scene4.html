@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="theme-color" content="#171127" />
+    <title>Notre histoire — scène 4</title>
+    <link rel="stylesheet" href="scene.css" />
+    <script src="scenes.js" defer></script>
+    <script src="scene.js" defer></script>
+  </head>
+  <body data-scene="4">
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="wordmark" href="scene1.html" aria-label="Recommencer l’histoire"><span class="wordmark-icon">u.</span><span>notre histoire</span></a>
+        <div class="date-pill"><span class="date-dot"></span> MARDI 6 OCTOBRE 2026</div>
+      </header>
+      <section class="story-card" aria-label="Dialogue entre Mbola et Anja">
+        <div class="scene-topline">
+          <span class="chapter-label" id="sceneChapter"></span>
+          <span class="scene-date">PARIS · 2026</span>
+        </div>
+        <div class="scene-heading">
+          <h1 id="sceneTitle"></h1>
+          <span class="scene-heart" aria-hidden="true">♡</span>
+        </div>
+        <div class="progress-track" id="progress" role="progressbar" aria-label="Progression de l’histoire" aria-valuemin="1" aria-valuemax="7" aria-valuenow="4">
+          <span class="progress-fill" id="progressFill"></span>
+        </div>
+        <div class="dialogue" id="dialogue" aria-live="polite" aria-relevant="additions"></div>
+        <section class="choice-panel" id="choices" aria-label="Choix de réponse">
+          <p class="choice-question" id="choicePrompt"></p>
+          <div class="answer-list" id="answerList"></div>
+        </section>
+        <section class="ending-panel" id="endingPanel" hidden>
+          <span class="ending-heart" aria-hidden="true">♡</span>
+          <p class="ending-label">FIN DE NOTRE PETITE HISTOIRE</p>
+          <h2>Joyeux anniversaire, Anja.</h2>
+          <p>Une soirée qui restera parmi mes plus beaux souvenirs. Je t’aime. 💜</p>
+          <button class="memories-button" id="openMemories" type="button">Voir la carte maintenant <span aria-hidden="true">↗</span></button>
+        </section>
+        <footer class="scene-footer">
+          <span id="progressText">Scène 4 sur 7</span>
+          <span class="footer-hearts" aria-hidden="true">✦ &nbsp; ♡ &nbsp; ✦</span>
+        </footer>
+      </section>
+      <footer class="page-footer"><span>fait avec beaucoup d’amour <b>♥</b></span><span>un petit souvenir, rien qu’à nous</span></footer>
+    </main>
+    <dialog class="retry-dialog" id="retryDialog" aria-labelledby="retryTitle" aria-describedby="retryDescription">
+      <div class="retry-icon" aria-hidden="true">↻</div>
+      <p class="dialog-kicker">ON REPREND ?</p>
+      <h2 id="retryTitle">Cette réponse ne fait pas avancer l’histoire.</h2>
+      <p id="retryDescription">Recommence depuis le début pour retrouver le bon chemin.</p>
+      <button type="button" class="restart-button" id="restartStory">Recommencer l’histoire <span aria-hidden="true">↗</span></button>
+    </dialog>
+    
+  </body>
+</html>
